@@ -26,7 +26,7 @@ class TraineeModel extends Model {
     }
 
     public function readSSN($ssn) {
-        $query = "SELECT * FROM $this->db_table WHERE SSN=$ssn;";
+        $query = "SELECT * FROM $this->db_table WHERE SSN LIKE '%$ssn%';";
         $stmt = mysqli_query($this->conn, $query);
 
         if (mysqli_num_rows($stmt) > 0) return mysqli_fetch_assoc($stmt);
@@ -34,7 +34,7 @@ class TraineeModel extends Model {
     }
 
     public function readName($name) {
-        $query = "SELECT * FROM $this->query_inf_trainee WHERE name=LOWER('$name');";
+        $query = "SELECT * FROM $this->query_inf_trainee WHERE name LIKE '%$name%';";
         $stmt = mysqli_query($this->conn, $query);
 
         if (mysqli_num_rows($stmt) == 0) throw new Exception("User SSN does not exist");
@@ -48,7 +48,7 @@ class TraineeModel extends Model {
 
     public function readFullInf($ssn) {
         $tb_full_trainee = "(SELECT * FROM $this->query_ac_trainee JOIN $this->query_inf_trainee USING (SSN)) as full_trainee";
-        $query = "SELECT * FROM $tb_full_trainee WHERE SSN=$ssn;";
+        $query = "SELECT * FROM $tb_full_trainee WHERE SSN LIKE '%$ssn%';";
         $stmt = mysqli_query($this->conn, $query);
         if (mysqli_num_rows($stmt) > 0) return mysqli_fetch_assoc($stmt);
         else throw new Exception("User SSN does not exist");
