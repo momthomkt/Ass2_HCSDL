@@ -24,6 +24,10 @@ class TraineeView {
     public function detailRespond($result){
         echo json_encode($result);
     }
+
+    public function getResultRespond($result){
+        echo json_encode($result);
+    }
 }
 
 ?>

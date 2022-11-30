@@ -42,9 +42,6 @@ class Trainee {
                 $Caddress = isset($data->Caddress) ? $data->Caddress : "";
                 $Cphone = isset($data->Cphone) ? $data->Cphone : "";
                 $Edate = isset($data->Edate) ? $data->Edate : "";
-                if(!isset($Edate)){
-                    throw new Exception("Không có Edate");
-                }
 
                 $result = $this->model->addTrainee($SSN, $Fname, $Lname, $address, $phone, $DoB, $photo, $Cnumber, $Cname, $Caddress, $Cphone, $Edate);
                 $this->view->addRespond($result);
@@ -57,10 +54,10 @@ class Trainee {
 
             // Cau b
             elseif ($arr[1]=="search"){
-                if (isset($arr[2])) {
-                    $result = $this->model->readName($arr[2]);
-                    $this->view->searchRespond($result);
-                }
+                $data = json_decode(file_get_contents("php://input"));
+                $name = isset($data->name) ? $data->name : "";
+                $result = $this->model->readName($name);
+                $this->view->searchRespond($result);
             }
             // Cau c
             elseif ($arr[1]=="detail"){
@@ -68,6 +65,14 @@ class Trainee {
                     $result = $this->model->readFullInf((int)$arr[2]);
                     $this->view->readRespond($result);
                 }
+            }
+            else if($arr[1] == "getResult")
+            {
+                $data = json_decode(file_get_contents("php://input"));
+                $SSN = isset($data->SSN) ? $data->SSN : "";
+                $year = isset($data->year) ? $data->year : "";
+                $result = $this->model->ResultOfTrainee($SSN, $year);
+                $this->view->getResultRespond($result);
             }
             else throw new Exception("Wrong URL");
         }
