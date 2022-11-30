@@ -79,10 +79,10 @@ class User {
                 $result = $this->model->login($username, $password);
                 $this->view->readRespond($result);
             }
-            else if ($arr[1]=="getUser") {
-                $result = $this->model->getUser();
-                $this->view->readRespond($result);
-            }
+            // else if ($arr[1]=="getUser") {
+            //     $result = $this->model->getUser();
+            //     $this->view->readRespond($result);
+            // }
             else throw new Exception("Wrong URL");
         }
         else throw new Exception("Wrong URL");

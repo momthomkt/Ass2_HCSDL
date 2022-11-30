@@ -27,23 +27,45 @@ class Trainee {
                     $this->view->readRespond($result);
                 }
             }
-            elseif ($arr[1]=="caub"){
+            // Cau a
+            if ($arr[1] == "add"){
+                $data = json_decode(file_get_contents("php://input"));
+                $SSN = isset($data->SSN) ? $data->SSN : "";
+                $Fname = isset($data->Fname) ? $data->Fname : "";
+                $Lname = isset($data->Lname) ? $data->Lname : "";
+                $address = isset($data->address) ? $data->address : "";
+                $phone = isset($data->phone) ? $data->phone : "";
+                $DoB = isset($data->DoB) ? $data->DoB : "";
+                $photo = isset($data->photo) ? $data->photo : "";
+                $Cnumber = isset($data->Cnumber) ? $data->Cnumber : "";
+                $Cname = isset($data->Cname) ? $data->Cname : "";
+                $Caddress = isset($data->Caddress) ? $data->Caddress : "";
+                $Cphone = isset($data->Cphone) ? $data->Cphone : "";
+                $Edate = isset($data->Edate) ? $data->Edate : "";
+                if(!isset($Edate)){
+                    throw new Exception("Không có Edate");
+                }
+
+                $result = $this->model->addTrainee($SSN, $Fname, $Lname, $address, $phone, $DoB, $photo, $Cnumber, $Cname, $Caddress, $Cphone, $Edate);
+                $this->view->addRespond($result);
+                // if (isset($arr[2]) && is_numeric($arr[2]) && (int)$arr[2]>0 && strlen($arr[2]) == 12){
+                //     $result = $this->model->addTrainee($arr[2]);
+                //     $this->view->addRespond($result);
+                // }
+                // else throw new Exception("Wrong Trainee SSN");
+            }
+
+            // Cau b
+            elseif ($arr[1]=="search"){
                 if (isset($arr[2])) {
                     $result = $this->model->readName($arr[2]);
-                    $this->view->readRespond($result);
-                }
-                else {
-                    $result = $this->model->readList();
-                    $this->view->readRespond($result);
+                    $this->view->searchRespond($result);
                 }
             }
-            elseif ($arr[1]=="cauc"){
+            // Cau c
+            elseif ($arr[1]=="detail"){
                 if (isset($arr[2]) && is_numeric($arr[2]) && (int)$arr[2]>0) {
                     $result = $this->model->readFullInf((int)$arr[2]);
-                    $this->view->readRespond($result);
-                }
-                else {
-                    $result = $this->model->readList();
                     $this->view->readRespond($result);
                 }
             }
