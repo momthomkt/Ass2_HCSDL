@@ -36,7 +36,6 @@ class TraineeModel extends Model {
         $query = "SELECT SSN FROM $table_person WHERE SSN = $SSN;";
         $stmt = mysqli_query($this->conn, $query);
         if (mysqli_num_rows($stmt) > 0){
-            echo "aloalo123";
             // return "Mã định danh SSN đã tồn tại";
             throw new Exception("Mã định danh SSN đã tồn tại");
         }
