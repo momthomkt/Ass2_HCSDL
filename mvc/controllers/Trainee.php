@@ -66,6 +66,7 @@ class Trainee {
                     $this->view->readRespond($result);
                 }
             }
+            // Cau d
             else if($arr[1] == "getResult")
             {
                 $data = json_decode(file_get_contents("php://input"));

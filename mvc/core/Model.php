@@ -2,10 +2,10 @@
 
 class Model {
     protected $servername = "localhost";
-    protected $username = "root";
+    protected $username = "sManager";
     protected $password = "";
     protected $db_name = "assignment2";
-    protected $db_name2 = "user";
+    protected $db_name2 = "mysql";
     protected $conn;
     protected $conn2;
     public function __construct()

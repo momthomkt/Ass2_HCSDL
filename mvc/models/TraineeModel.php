@@ -48,6 +48,7 @@ class TraineeModel extends Model {
         }
         $query = "SELECT Cnumber FROM $table_company WHERE Cnumber = '$Cnumber';";
         $stmt = mysqli_query($this->conn, $query);
+        // Kiểm tra xem có công ty trong bảng đã tạo chưa
         if (mysqli_num_rows($stmt) == 0){
             $query = "SELECT phone FROM $table_company WHERE phone = $phone;";
             $stmt = mysqli_query($this->conn, $query);
