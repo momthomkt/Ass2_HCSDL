@@ -56,6 +56,7 @@ class Trainee {
             elseif ($arr[1]=="search"){
                 $data = json_decode(file_get_contents("php://input"));
                 $name = isset($data->name) ? $data->name : "";
+                if($name == "") throw new Exception("Please enter the name you are looking for");
                 $result = $this->model->readName($name);
                 $this->view->searchRespond($result);
             }
