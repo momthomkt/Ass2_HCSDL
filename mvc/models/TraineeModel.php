@@ -14,7 +14,10 @@ class TraineeModel extends Model {
     private $db_table = "trainee";
 
     public function readList() {
-        $query = "SELECT * FROM $this->db_table;";
+        $query ="SELECT P.SSN, P.Fname, P.Lname, T.DoB, P.address, P.phone, C.name 
+                FROM person P, trainee T, company C 
+                WHERE P.SSN = T.SSN AND T.Company_ID = C.Cnumber 
+                ORDER BY P.Lname, P.Fname;";
         $stmt = mysqli_query($this->conn, $query);
         $result = array(); 
 

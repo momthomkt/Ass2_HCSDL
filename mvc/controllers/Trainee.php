@@ -76,7 +76,10 @@ class Trainee {
                 $result = $this->model->ResultOfTrainee($SSN, $year);
                 $this->view->getResultRespond($result);
             }
-            else throw new Exception("Wrong URL");
+            else 
+            {
+                throw new Exception("Wrong URL");
+            }
         }
         else throw new Exception("Wrong URL");
     }
