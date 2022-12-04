@@ -1,7 +1,4 @@
 <?php
-
-header('Content-Type: application/json');
-
 class ErrorView {
     private $message;
 

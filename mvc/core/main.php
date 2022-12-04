@@ -12,11 +12,9 @@ function main() {
     $arr = urlProcess();
     if (isset($arr[0]) && file_exists("./mvc/controllers/".$arr[0].".php")) {
         $controller_name = $arr[0];
-
         require_once "./mvc/controllers/". $controller_name .".php";
         $controller = new $controller_name();
-        
-        print_r($_GET);
+
         try {
             $controller->execute($arr);
         }

@@ -97,7 +97,7 @@ class TraineeModel extends Model {
 
     public function readSSN($ssn) {
         $query = "SELECT * FROM $this->db_table WHERE SSN=$ssn;";
-        // $query = "SELECT * FROM $this->db_table WHERE SSN LIKE '%$ssn%';";
+        // $query = "SELECT * FROM $this->db_table WHERE SSN LIKE '$ssn';";
         $stmt = mysqli_query($this->conn, $query);
 
         if (mysqli_num_rows($stmt) > 0) return mysqli_fetch_assoc($stmt);
@@ -105,7 +105,7 @@ class TraineeModel extends Model {
     }
 
     public function readName($name) {
-        // $query = "SELECT * FROM $this->query_inf_trainee WHERE name=LOWER('$name');";
+       // $query = "SELECT * FROM $this->query_inf_trainee WHERE name like LOWER('$name');";
         $query = "SELECT * FROM $this->query_inf_trainee WHERE name LIKE '%$name%';";
         $stmt = mysqli_query($this->conn, $query);
 

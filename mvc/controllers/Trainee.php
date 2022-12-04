@@ -28,6 +28,7 @@ class Trainee {
                 }
             }
             // Cau a
+            else
             if ($arr[1] == "add"){
                 $data = json_decode(file_get_contents("php://input"));
                 $SSN = isset($data->SSN) ? $data->SSN : "";
@@ -64,7 +65,7 @@ class Trainee {
             elseif ($arr[1]=="detail"){
                 if (isset($arr[2]) && is_numeric($arr[2]) && (int)$arr[2]>0) {
                     $result = $this->model->readFullInf((int)$arr[2]);
-                    $this->view->readRespond($result);
+                    $this->view->detailRespond($result);
                 }
             }
             // Cau d
