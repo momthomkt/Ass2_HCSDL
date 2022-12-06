@@ -49,7 +49,7 @@ BEGIN
 		CLOSE cur_Result2 ; 	
         
         -- get all result
-		SELECT Episode, SUM(Vote) AS 'Num of votes/ avg score'
+		SELECT Episode, SUM(Vote) AS 'vote'
         FROM Result 
         GROUP BY Episode ; 
         DROP TABLE Result;
