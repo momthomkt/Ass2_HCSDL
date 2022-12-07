@@ -1,13 +1,10 @@
 <?php
-
 function urlProcess(){
     if( isset($_GET["url"]) ){
         return explode("/", filter_var(trim($_GET["url"], "/")));
     }
     else return array();
 }
-
-
 function main() {
     $arr = urlProcess();
     if (isset($arr[0]) && file_exists("./mvc/controllers/".$arr[0].".php")) {
@@ -30,5 +27,4 @@ function main() {
         $err->respond();
     }
 }
-
 ?>

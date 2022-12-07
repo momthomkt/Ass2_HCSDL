@@ -33,19 +33,16 @@ class TraineeModel extends Model {
         $table_trainee = "trainee";
         $table_company = "company";
         if($SSN == "" or $Fname == "" or $Lname == "" or $phone == "" or $Cnumber == "" or $Cphone == ""){
-            // return "Vui lòng điền đầy đủ thông tin có dấu *";
             throw new Exception("Vui lòng điền đầy đủ thông tin có dấu *");
         }
         $query = "SELECT SSN FROM $table_person WHERE SSN = $SSN;";
         $stmt = mysqli_query($this->conn, $query);
         if (mysqli_num_rows($stmt) > 0){
-            // return "Mã định danh SSN đã tồn tại";
             throw new Exception("Mã định danh SSN đã tồn tại");
         }
         $query = "SELECT phone FROM $table_person WHERE phone = $phone;";
         $stmt = mysqli_query($this->conn, $query);
         if (mysqli_num_rows($stmt) > 0){
-            // return "Số điện thoại cá nhân đã tồn tại";
             throw new Exception("Số điện thoại cá nhân đã tồn tại");
         }
         $query = "SELECT Cnumber FROM $table_company WHERE Cnumber = '$Cnumber';";
@@ -56,7 +53,6 @@ class TraineeModel extends Model {
             $stmt = mysqli_query($this->conn, $query);
                 if (mysqli_num_rows($stmt) > 0)
                 {
-                    // return "Số điện thoại công ty đang làm việc đã tồn tại";
                     throw new Exception("Số điện thoại công ty đang làm việc đã tồn tại");
                 }
                 else
@@ -65,8 +61,6 @@ class TraineeModel extends Model {
                     $stmt3 = mysqli_query($this->conn, $query3);
                     if(!$stmt3) 
                     {
-                        echo "123456";
-                        // return "Lỗi insert bảng company";
                         throw new Exception("Lỗi insert bảng company");
                     }
                 }
@@ -75,7 +69,6 @@ class TraineeModel extends Model {
         $stmt1 = mysqli_query($this->conn, $query1);
         if(!$stmt1) 
         {
-            // return "Lỗi insert bảng person";
             throw new Exception("Lỗi insert bảng person");
         }
 
@@ -83,16 +76,9 @@ class TraineeModel extends Model {
         $stmt2 = mysqli_query($this->conn, $query2);
         if(!$stmt2) 
         {
-            // return "Lỗi insert bảng trainee";
             throw new Exception("Lỗi insert bảng trainee");
         }
-
-        // $query2 = "INSERT INTO company values ('$Cnumber', '$Cname', '$Caddress', '$Edate');";
-        // $stmt2 = mysqli_query($this->conn, $query);
-        // $query3 = "INSERT INTO trainee values ('$SSN', '$Fname', '$Lname', '$address', '$phone');";
-        // $stmt3 = mysqli_query($this->conn, $query);
         return "Add successfully";
-
     }
 
     public function readSSN($ssn) {

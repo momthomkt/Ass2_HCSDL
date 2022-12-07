@@ -9,12 +9,10 @@
 class Trainee {
     private $model;
     private $view;
-
     function __construct() {
         $this->model = new TraineeModel();
         $this->view = new TraineeView();
     }
-
     function execute($arr) {
         if (isset($arr[1])) {
             if ($arr[1]=="read") {
@@ -27,7 +25,7 @@ class Trainee {
                     $this->view->readRespond($result);
                 }
             }
-            // Cau a
+            // Câu a) Thêm thông tin cho 1 thực tập sinh mới
             else
             if ($arr[1] == "add"){
                 $data = json_decode(file_get_contents("php://input"));
@@ -44,15 +42,10 @@ class Trainee {
                 $Cphone = isset($data->Cphone) ? $data->Cphone : "";
                 $Edate = isset($data->Edate) ? $data->Edate : "";
 
-                $result = $this->model->addTrainee($SSN, $Fname, $Lname, $address, $phone, $DoB, $photo, $Cnumber, $Cname, $Caddress, $Cphone, $Edate);
+                $result = $this->model->addTrainee($SSN, $Fname, $Lname, $address, $phone, $DoB, $photo, 
+                $Cnumber, $Cname, $Caddress, $Cphone, $Edate);
                 $this->view->addRespond($result);
-                // if (isset($arr[2]) && is_numeric($arr[2]) && (int)$arr[2]>0 && strlen($arr[2]) == 12){
-                //     $result = $this->model->addTrainee($arr[2]);
-                //     $this->view->addRespond($result);
-                // }
-                // else throw new Exception("Wrong Trainee SSN");
             }
-
             // Cau b
             elseif ($arr[1]=="search"){
                 $data = json_decode(file_get_contents("php://input"));
@@ -69,8 +62,7 @@ class Trainee {
                 }
             }
             // Cau d
-            else if($arr[1] == "getResult")
-            {
+            else if($arr[1] == "getResult"){
                 $data = json_decode(file_get_contents("php://input"));
                 $SSN = isset($data->SSN) ? $data->SSN : "";
                 $year = isset($data->year) ? $data->year : "";
@@ -84,6 +76,5 @@ class Trainee {
         }
         else throw new Exception("Wrong URL");
     }
-
 }
 ?>
