@@ -13,7 +13,7 @@ class UserModel extends Model {
     private $db_table2 = "user";
 
     public function login($username, $password) {
-        require_once "user-auth/VmtHandler.php";
+        // require_once "user-auth/VmtHandler.php";
         try{
             // check if username valid
             if (strlen($username) < 5 || strlen($username) > 50 || is_numeric($username[0])) 
@@ -32,8 +32,9 @@ class UserModel extends Model {
                 // IF PASSWORD IS CORRECT THEN SEND THE LOGIN TOKEN
                 if($check_password):
 
-                    $vmt = new VmtHandler();
-                    $token = $vmt->VmtEncode(json_encode($data));
+                    // $vmt = new VmtHandler();
+                    // $token = $vmt->VmtEncode(json_encode($data));
+                    $token = $data;
                     $returnData = [
                         'message' => 'successful',
                         'token' => $token
